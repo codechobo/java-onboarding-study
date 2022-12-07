@@ -1,30 +1,18 @@
 package onboarding;
 
 import onboarding.problem4.Dictionary;
-import onboarding.problem4.GreenFrog;
-import onboarding.problem4.Mother;
-import org.assertj.core.internal.Strings;
-
-import java.util.Arrays;
+import onboarding.problem4.Validation;
 
 public class Problem4 {
     public static String solution(String word) {
-        Mother mother = new Mother();
-        GreenFrog greenFrog = mother.say(word);
+        Dictionary dictionary = new Dictionary();
+        Validation validation = new Validation();
+        validation.isValid(word);
 
-        try {
-            Dictionary dictionary = new Dictionary(word);
-
-            return greenFrog.answer(dictionary);
-        } catch (IllegalArgumentException e) {
-
-            System.out.println(e.getMessage());
-            return "";
+        for (int index = 0; index < word.length(); index++) {
+            dictionary.refer(word.charAt(index));
         }
-    }
 
-    public static void main(String[] args) {
-        String input = "I love you";
-        System.out.println(solution(input));
+        return dictionary.translate();
     }
 }
