@@ -13,29 +13,20 @@ public class Problem1 {
     private static final int RIGHT_PAGE = 1;
 
     public static int solution(List<Integer> pobi, List<Integer> crong) {
-        // 예외 처리
-        // 리스트의 길이는 2이다.
-        if (isLength(pobi, crong)) {
+        if (isLength(pobi, crong) || isPageNumberInOrder(pobi, crong)) {
             return -1;
         }
 
-        // 페이지 번호가 순서대로 들어있다. 에를 들어 왼쪽 페이지번호가 1이면 오른쪽 페이지 번호는 2 여야 한다.
-        if (isPageNumberInOrder(pobi, crong)) {
-            return -1;
-        }
+        int pobiValue = Math.max(
+                Math.max(sum(pageOpen(pobi, LEFT_PAGE)), multiply(pageOpen(pobi, LEFT_PAGE))),
+                Math.max(sum(pageOpen(pobi, RIGHT_PAGE)), multiply(pageOpen(pobi, RIGHT_PAGE)))
+        );
 
+        int crongValue = Math.max(
+                Math.max(sum(pageOpen(crong, LEFT_PAGE)), multiply(pageOpen(crong, LEFT_PAGE))),
+                Math.max(sum(pageOpen(crong, RIGHT_PAGE)), multiply(pageOpen(crong, RIGHT_PAGE)))
+        );
 
-        int pobiLeftValue = Math.max(sum(pageOpen(pobi, LEFT_PAGE)), multiply(pageOpen(pobi, LEFT_PAGE))); // 포비의 왼쪽 페이지 번호
-        int pobiRightValue = Math.max(sum(pageOpen(pobi, RIGHT_PAGE)), multiply(pageOpen(pobi, RIGHT_PAGE))); // 포비의 오른쪽 페이지 번호
-
-        int crongLeftValue = Math.max(sum(pageOpen(crong, LEFT_PAGE)), multiply(pageOpen(crong, LEFT_PAGE))); // 크롱의 왼쪽 페이지 번호
-        int crongRightValue = Math.max(sum(pageOpen(crong, RIGHT_PAGE)), multiply(pageOpen(crong, RIGHT_PAGE))); // 크롱의 오른쪽 페이지 번호
-
-        // 2~3 과정에서 가장 큰 수를 본인의 점수로 한다.
-        int pobiValue = Math.max(pobiLeftValue, pobiRightValue);
-        int crongValue = Math.max(crongLeftValue, crongRightValue);
-
-        // 점수를 비교해 가장 높은 사람이 게임의 승자가 된다.
         return compareTo(pobiValue, crongValue);
     }
 
@@ -53,11 +44,6 @@ public class Problem1 {
         }
 
         return true;
-    }
-
-    public static void main(String[] args) {
-        int solution = solution(List.of(99, 132), List.of(211, 212));
-        System.out.println(solution);
     }
 
     // 1. 책을 임의로 펼친다.
