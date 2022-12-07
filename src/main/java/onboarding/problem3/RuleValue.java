@@ -1,4 +1,4 @@
-package onboarding;
+package onboarding.problem3;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
