@@ -9,7 +9,15 @@ public class Problem1 {
     private static final int RIGHT_PAGE = 1;
 
     public static int solution(List<Integer> pobi, List<Integer> crong) {
-        if (isLength(pobi, crong) || isPageNumberInOrder(pobi, crong)) {
+        if (!isLength(pobi, crong)) {
+            return -1;
+        }
+
+        if (!isPageNumberInOrder(pobi, crong)) {
+            return -1;
+        }
+
+        if (!isStartPageOrLastPage(pobi, crong)) {
             return -1;
         }
 
@@ -26,20 +34,32 @@ public class Problem1 {
         return compareTo(pobiValue, crongValue);
     }
 
-    private static boolean isPageNumberInOrder(List<Integer> pobi, List<Integer> crong) {
-        if (pobi.get(LEFT_PAGE) + 1 == pobi.get(RIGHT_PAGE) && crong.get(LEFT_PAGE) + 1 == crong.get(RIGHT_PAGE)) {
-            return false;
+    private static boolean isStartPageOrLastPage(List<Integer> pobi, List<Integer> crong) {
+        if (isOpenPageValid(pobi) && isOpenPageValid(crong)) {
+            return true;
         }
 
-        return true;
+        return false;
+    }
+
+    private static boolean isOpenPageValid(List<Integer> person) {
+        return !(pageOpen(person, LEFT_PAGE) == 1 || pageOpen(person, RIGHT_PAGE) == 400);
+    }
+
+    private static boolean isPageNumberInOrder(List<Integer> pobi, List<Integer> crong) {
+        if (pageOpen(pobi, LEFT_PAGE) + 1 == pageOpen(pobi, RIGHT_PAGE) && pageOpen(crong, LEFT_PAGE) + 1 == pageOpen(crong, RIGHT_PAGE)) {
+            return true;
+        }
+
+        return false;
     }
 
     private static boolean isLength(List<Integer> pobi, List<Integer> crong) {
         if (pobi.size() == 2 && crong.size() == 2) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     // 1. 책을 임의로 펼친다.
@@ -67,6 +87,6 @@ public class Problem1 {
 
     // 더한 값과 곱한 값 중 가장 큰 수를 비교하라
     public static int compareTo(int pobiValue, int crongValue) {
-        return Integer.compare(pobiValue, crongValue);
+        return Integer.compare(pobiValue, crongValue) == -1 ? 1 : 2;
     }
 }
