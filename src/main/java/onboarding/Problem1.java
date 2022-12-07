@@ -43,4 +43,8 @@ public class Problem1 {
         return result;
     }
 
+    // 더한 값과 곱한 값 중 가장 큰 수를 비교하라
+    public static int compareTo(int sumValue, int multiplyValue) {
+        return Math.max(sumValue, multiplyValue);
+    }
 }
