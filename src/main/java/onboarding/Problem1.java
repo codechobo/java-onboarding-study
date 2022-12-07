@@ -13,6 +13,15 @@ public class Problem1 {
     private static final int RIGHT_PAGE = 1;
 
     public static int solution(List<Integer> pobi, List<Integer> crong) {
+        // 예외 처리
+        // 리스트의 길이는 2이다.
+        if (isLength(pobi, crong)) {
+            return -1;
+        }
+
+
+
+
         int pobiLeftValue = Math.max(sum(pageOpen(pobi, LEFT_PAGE)), multiply(pageOpen(pobi, LEFT_PAGE))); // 포비의 왼쪽 페이지 번호
         int pobiRightValue = Math.max(sum(pageOpen(pobi, RIGHT_PAGE)), multiply(pageOpen(pobi, RIGHT_PAGE))); // 포비의 오른쪽 페이지 번호
 
@@ -25,6 +34,14 @@ public class Problem1 {
 
         // 점수를 비교해 가장 높은 사람이 게임의 승자가 된다.
         return compareTo(pobiValue, crongValue);
+    }
+
+    private static boolean isLength(List<Integer> pobi, List<Integer> crong) {
+        if (pobi.size() == 2 || crong.size() == 2) {
+            return false;
+        }
+
+        return true;
     }
 
     public static void main(String[] args) {
