@@ -19,7 +19,10 @@ public class Problem1 {
             return -1;
         }
 
-
+        // 페이지 번호가 순서대로 들어있다. 에를 들어 왼쪽 페이지번호가 1이면 오른쪽 페이지 번호는 2 여야 한다.
+        if (isPageNumberInOrder(pobi, crong)) {
+            return -1;
+        }
 
 
         int pobiLeftValue = Math.max(sum(pageOpen(pobi, LEFT_PAGE)), multiply(pageOpen(pobi, LEFT_PAGE))); // 포비의 왼쪽 페이지 번호
@@ -36,8 +39,16 @@ public class Problem1 {
         return compareTo(pobiValue, crongValue);
     }
 
+    private static boolean isPageNumberInOrder(List<Integer> pobi, List<Integer> crong) {
+        if (pobi.get(LEFT_PAGE) + 1 == pobi.get(RIGHT_PAGE) && crong.get(LEFT_PAGE) + 1 == crong.get(RIGHT_PAGE)) {
+            return false;
+        }
+
+        return true;
+    }
+
     private static boolean isLength(List<Integer> pobi, List<Integer> crong) {
-        if (pobi.size() == 2 || crong.size() == 2) {
+        if (pobi.size() == 2 && crong.size() == 2) {
             return false;
         }
 
@@ -45,7 +56,7 @@ public class Problem1 {
     }
 
     public static void main(String[] args) {
-        int solution = solution(List.of(131, 132), List.of(211, 212));
+        int solution = solution(List.of(99, 132), List.of(211, 212));
         System.out.println(solution);
     }
 
