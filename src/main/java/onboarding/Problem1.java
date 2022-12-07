@@ -30,4 +30,17 @@ public class Problem1 {
         String[] split = String.valueOf(pageNumber).split("");
         return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
     }
+
+    // 모두 곱한다.
+    public static int multiply(Integer pageNumber) {
+        String[] split = String.valueOf(pageNumber).split("");
+
+        int result = 1;
+        for (String splitData : split) {
+            result += result * Integer.parseInt(splitData);
+        }
+
+        return result;
+    }
+
 }
