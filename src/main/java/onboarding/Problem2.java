@@ -2,12 +2,17 @@ package onboarding;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Problem2 {
 
     public static String solution(String cryptogram) {
-        Stack<String> stack = new Stack<>(); // 문자를 저장할 stack
+        Stack<String> stack = new Stack<>();
+
+        if (!isLength(cryptogram) || isContainsUppercase(cryptogram)) {
+            throw new IllegalArgumentException();
+        }
 
         String result = cryptogram;
         while (true) {
@@ -21,13 +26,24 @@ public class Problem2 {
 
             result = stack.stream().collect(Collectors.joining());
 
-            // 중복되지 않는 숫자가 없을 시 반복문 탈출
             if (count(makeStream(result).distinct()) == count(makeStream(result))) {
                 break;
             }
         }
 
         return result;
+    }
+
+    private static boolean isContainsUppercase(String cryptogram) {
+        return cryptogram.chars().anyMatch(Character::isUpperCase);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(solution("a"));
+    }
+
+    private static boolean isLength(String cryptogram) {
+        return cryptogram.length() >= 1 && cryptogram.length() <= 1000;
     }
 
     private static Stream<String> makeStream(String result) {
