@@ -1,29 +1,24 @@
 package onboarding;
 
-import onboarding.problem2.CryptogramConverter;
-import onboarding.problem2.ProblemTwoValidation;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Problem2 {
 
-    private static Stack<String> stack = new Stack<>();
-
     public static String solution(String cryptogram) {
-        CryptogramConverter convertor;
-        try {
-            convertor = new CryptogramConverter(new ProblemTwoValidation(cryptogram));
-            convertor.duplicatedWord(cryptogram);
+        Stack<String> stack = new Stack<>(); // 문자를 저장할 stack
 
-            String result = convertor.getConverterWord();
-            convertor.clear();
+        String result = cryptogram;
+            Arrays.stream(result.split("")).forEach(data -> {
+                if (!stack.isEmpty() && stack.peek().equals(data)) {
+                    stack.pop();
+                    return;
+                }
+                stack.push(data);
+            });
 
-            return result;
-        } catch (IllegalArgumentException e) {
 
-            System.out.println(e.getMessage());
-            return "";
-        }
+        return result;
     }
 }
 
