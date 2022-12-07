@@ -1,9 +1,5 @@
 package onboarding;
 
-import onboarding.problem1.infra.PageNumberAndSizeValidation;
-import onboarding.problem1.serivce.PageService;
-import onboarding.problem1.type.ResultValue;
-
 import java.util.Arrays;
 import java.util.List;
 
