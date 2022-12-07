@@ -2,6 +2,7 @@ package onboarding;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Problem2 {
 
@@ -10,7 +11,7 @@ public class Problem2 {
 
         String result = cryptogram;
         while (true) {
-            Arrays.stream(result.split("")).forEach(data -> {
+            makeStream(result).forEach(data -> {
                 if (!stack.isEmpty() && stack.peek().equals(data)) {
                     stack.pop();
                     return;
@@ -19,10 +20,22 @@ public class Problem2 {
             });
 
             result = stack.stream().collect(Collectors.joining());
+
+            // 중복되지 않는 숫자가 없을 시 반복문 탈출
+            if (count(makeStream(result).distinct()) == count(makeStream(result))) {
+                break;
+            }
         }
 
-
         return result;
+    }
+
+    private static Stream<String> makeStream(String result) {
+        return Arrays.stream(result.split(""));
+    }
+
+    private static int count(Stream<String> result) {
+        return (int) result.count();
     }
 }
 
