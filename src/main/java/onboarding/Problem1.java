@@ -13,41 +13,22 @@ public class Problem1 {
     private static final int RIGHT_PAGE = 1;
 
     public static int solution(List<Integer> pobi, List<Integer> crong) {
-        // 1. 책을 임의로 펼친다.
-        Integer pobiLeftPageNumber = pageOpen(pobi, LEFT_PAGE);
-        Integer pobiRightPageNumber = pageOpen(pobi, RIGHT_PAGE);
+        int pobiLeftValue = Math.max(sum(pageOpen(pobi, LEFT_PAGE)), multiply(pageOpen(pobi, LEFT_PAGE))); // 포비의 왼쪽 페이지 번호
+        int pobiRightValue = Math.max(sum(pageOpen(pobi, RIGHT_PAGE)), multiply(pageOpen(pobi, RIGHT_PAGE))); // 포비의 오른쪽 페이지 번호
 
-        Integer crongLeftPageNumber = pageOpen(crong, LEFT_PAGE);
-        Integer crongRightPageNumber = pageOpen(crong, RIGHT_PAGE);
-
-        int pobiLeftValue = compareTo(sum(pobiLeftPageNumber), multiply(pobiLeftPageNumber)); // 포비의 왼쪽 페이지 번호
-        int pobiRightValue = compareTo(sum(pobiRightPageNumber), multiply(pobiRightPageNumber)); // 포비의 오른쪽 페이지 번호
-
-        int crongLeftValue = compareTo(sum(crongLeftPageNumber), multiply(crongLeftPageNumber)); // 크롱의 왼쪽 페이지 번호
-        int crongRightValue = compareTo(sum(crongRightPageNumber), multiply(crongRightPageNumber)); // 크롱의 오른쪽 페이지 번호
+        int crongLeftValue = Math.max(sum(pageOpen(crong, LEFT_PAGE)), multiply(pageOpen(crong, LEFT_PAGE))); // 크롱의 왼쪽 페이지 번호
+        int crongRightValue = Math.max(sum(pageOpen(crong, RIGHT_PAGE)), multiply(pageOpen(crong, RIGHT_PAGE))); // 크롱의 오른쪽 페이지 번호
 
         // 2~3 과정에서 가장 큰 수를 본인의 점수로 한다.
-        int pobiValue = compareTo(pobiLeftValue, pobiRightValue);
-        int crongValue = compareTo(crongLeftValue, crongRightValue);
+        int pobiValue = Math.max(pobiLeftValue, pobiRightValue);
+        int crongValue = Math.max(crongLeftValue, crongRightValue);
 
         // 점수를 비교해 가장 높은 사람이 게임의 승자가 된다.
-        if (pobiValue == crongValue) {
-            return 0;
-        }
-
-        if (pobiValue > crongValue) {
-            return 1;
-        }
-
-        if (pobiValue < crongValue) {
-            return 2;
-        }
-
-        return -1;
+        return compareTo(pobiValue, crongValue);
     }
 
     public static void main(String[] args) {
-        int solution = solution(List.of(97, 98), List.of(197, 198));
+        int solution = solution(List.of(131, 132), List.of(211, 212));
         System.out.println(solution);
     }
 
@@ -75,7 +56,7 @@ public class Problem1 {
     }
 
     // 더한 값과 곱한 값 중 가장 큰 수를 비교하라
-    public static int compareTo(int firstValue, int secondValue) {
-        return Math.max(firstValue, secondValue);
+    public static int compareTo(int pobiValue, int crongValue) {
+        return Integer.compare(pobiValue, crongValue);
     }
 }
