@@ -9,6 +9,9 @@ import java.util.List;
 
 public class Problem1 {
 
+    private static final int LEFT_PAGE = 0;
+    private static final int RIGHT_PAGE = 1;
+
     public static int solution(List<Integer> pobi, List<Integer> crong) {
         // 1. 책을 임의로 펼친다.
         //2. 왼쪽 페이지 번호의 각 자리 숫자를 모두 더하거나, 모두 곱해 가장 큰 수를 구한다.
