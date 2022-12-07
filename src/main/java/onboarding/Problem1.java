@@ -31,20 +31,24 @@ public class Problem1 {
         int crongValue = compareTo(crongLeftValue, crongRightValue);
 
         // 점수를 비교해 가장 높은 사람이 게임의 승자가 된다.
+        if (pobiValue == crongValue) {
+            return 0;
+        }
+
         if (pobiValue > crongValue) {
             return 1;
         }
 
         if (pobiValue < crongValue) {
-            return 1;
+            return 2;
         }
-
-        if (pobiValue == crongValue) {
-            return 0;
-        }
-        // 시작 면이나 마지막 면이 나오
 
         return -1;
+    }
+
+    public static void main(String[] args) {
+        int solution = solution(List.of(97, 98), List.of(197, 198));
+        System.out.println(solution);
     }
 
     // 1. 책을 임의로 펼친다.
@@ -64,7 +68,7 @@ public class Problem1 {
 
         int result = 1;
         for (String splitData : split) {
-            result += result * Integer.parseInt(splitData);
+            result *= Integer.parseInt(splitData);
         }
 
         return result;
