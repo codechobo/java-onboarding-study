@@ -24,4 +24,10 @@ public class Problem1 {
     public static Integer pageOpen(List<Integer> person, int position) {
         return person.get(position);
     }
+
+    // 각 페이지 번호의 각 자리 숫자를 모두 더한다.
+    public static int sum(Integer pageNumber) {
+        String[] split = String.valueOf(pageNumber).split("");
+        return Arrays.stream(split).mapToInt(Integer::parseInt).sum();
+    }
 }
